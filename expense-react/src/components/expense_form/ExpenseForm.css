@@ -1,0 +1,44 @@
+.new-expense {
+    margin: 10px;
+    padding: 10px;
+    background-color: #a892ee;
+    border-radius: 12px;
+    color: rgb(64, 0, 93);
+    font-family: poppins;
+    font-weight: 600;
+}
+
+.expense-form label {
+    display: block;
+}
+
+.expense-form input {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.expense-form button {
+    border-radius: 12px;
+    background-color: #444;
+    color: white;
+    padding: 0.5rem;
+    margin-right: 10px;
+}
+
+.form-control-button {
+    margin: 10px;
+
+}
+
+.new-btn {
+    width: 200px;
+    border-radius: 12px;
+    background-color: #444;
+    color: white;
+    font-family: poppins;
+    font-weight: 600;
+    padding: 0.5rem;
+    margin-left: 520px;
+    text-align: center;
+}
