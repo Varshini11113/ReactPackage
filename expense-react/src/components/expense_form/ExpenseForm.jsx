@@ -29,24 +29,25 @@ const ExpenseForm = (props) => {
     //     }
     // }
 
+    //unidirectional flow
     const handleFormSubmit = (e) => {
         // console.log('event', e);
-        e.preventDefault()
+        e.preventDefault() //to prevent from re-loading
+        if(!title || !amount ||!date)
+        {
+            toast("Please fill all inputs");
+            return;
+        }
         const data = {
             name: title,
+            //amount: amount 
             amount,
             date: new Date(date)
         }
-        if(data.name.length == 0){
-            alert('Please enter valid tiltle')
-            if(data.amount < 0){
-                alert('Amount should be grater than 0')
-            }
-            if(data.date == 'Invalid date'){
-                alert('Please enter date in given format')
-            }
-        }
-        else
+        // if(data.name == '' || data.amount < 0 || data.amount.length == 0 || data.date == 'Invalid date') alert('Please enter valid input in all input box')
+        // else if(data.amount < 0) alert('Amount should be grater than 0')
+        // else if(data.date == 'Invalid date') alert('Please enter date in given format')
+        // else
         addExpense(data)
         
         setTitle('')
