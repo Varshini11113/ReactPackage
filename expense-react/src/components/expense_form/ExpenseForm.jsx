@@ -1,16 +1,32 @@
 import { useForm } from "react-hook-form";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import "./ExpenseForm.css"
+import { toast } from "react-toastify";
 
 const ExpenseForm = (props) => {
 
     // const { register, handleSubmit, errors } = useForm()
-    const { addExpense } = props
+    const { addExpense, editData, setEditData, editExpense} = props
     const [title, setTitle] = useState('');
     const [amount, setAmount] = useState('');
     const [date, setDate] = useState('');
-    const [isopen, setOpen] = useState('')
+    const [isopen, setOpen] = useState(false)
+    // const [editData, setEditData] = useState('')
     
+    // /useEffect/ 
+    //useEffect(() => {callback func/-}, [dependency]) whenever dependency changes, the useEffect keeps the updated value.
+
+    useEffect(() => {
+        console.log(editData)
+        if(editData.id) {
+            setOpen(true)
+            setTitle(editData.name)
+            setAmount(editData.amount)
+            setDate(editData.date.toISOString().split('T')[0])
+        }
+    },[editData])
+
+
     const handleTitleChange = (e) => {
         setTitle(e.target.value)
         // console.log(title)
@@ -33,9 +49,10 @@ const ExpenseForm = (props) => {
     const handleFormSubmit = (e) => {
         // console.log('event', e);
         e.preventDefault() //to prevent from re-loading
-        if(!title || !amount ||!date)
+        if(!title ||!amount ||!date)
         {
-            toast("Please fill all inputs");
+            // alert("Enter all fields");
+            toast.error("Please fill all inputs!");
             return;
         }
         const data = {
@@ -48,15 +65,33 @@ const ExpenseForm = (props) => {
         // else if(data.amount < 0) alert('Amount should be grater than 0')
         // else if(data.date == 'Invalid date') alert('Please enter date in given format')
         // else
-        addExpense(data)
-        
+        // if(editData){
+        //     addExpense(data)
+        //     setTitle('')
+        //     setAmount('')
+        //     setDate('')
+        // }
+
+        if(editData?.id){ //only goes inside if it is undefined
+            data.id = editData.id
+            editExpense(data)
+        }
+        else{
+            addExpense(data)
+        }
         setTitle('')
         setAmount('')
         setDate('')
     }
 
     const openForm = () => setOpen(true)
-    const closeForm = () => setOpen(false)
+    const closeForm = () => {
+        setEditData({})
+        setOpen(false)
+        setTitle('')
+        setAmount('')
+        setDate('')
+    }
 
     return (
         <div className="new-expense">
@@ -79,7 +114,7 @@ const ExpenseForm = (props) => {
             {/* <p>{errors.date.message}</p> */}
             <div className="form-control-button">
                 <button onClick={closeForm}>Cancel</button>
-                <button type="submit">Add expense</button>
+                <button type="submit">{editData.id ? 'Edit Expense' : 'Add expense'}</button>
             </div>
             </form> : <button type="submit" onClick={openForm} className="new-btn">New Expense</button>}
 

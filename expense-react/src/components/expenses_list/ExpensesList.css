@@ -1,3 +1,13 @@
 .expenses-list {
     padding: 10px;
 }
+
+.no-expense {
+    background-color: rgb(119, 119, 119);
+    border-radius: 12px;
+    color: white;
+    text-align: center;
+    margin: 150px 20px;
+    width: 95%;
+    height: 50%;
+}
