@@ -1,4 +1,4 @@
-
+import "./ContactList.css";
 
 function ContactList() {
     return (

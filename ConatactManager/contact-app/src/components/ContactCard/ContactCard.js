@@ -1,4 +1,4 @@
-
+import "./ContactCard.css" 
 
 function ContactCard() {
     return(
