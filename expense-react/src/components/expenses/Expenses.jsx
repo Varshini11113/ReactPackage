@@ -22,6 +22,7 @@ const EXPENSES = [{
 }]
 
 
+
 const Expenses = () => {
     const [expenses, setExpenses] = useState(EXPENSES)
     const [editData, setEditData] = useState({})
